@@ -28,14 +28,15 @@
             </div>
         </div>
         <WrapperModal />
+        <NotificationModal></NotificationModal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import Callgraph from '@/components/Callgraph.vue'
 import HeaderBar from '@/components/HeaderBar.vue';
 import MetricSideBar from '@/components/MetricSideBar.vue'
+import NotificationModal from '@/components/NotificationModal.vue';
 import ReportList from '@/components/ReportList.vue';
 import TableData from '@/components/TableData.vue';
 import WrapperModal from '@/components/WrapperModal.vue'

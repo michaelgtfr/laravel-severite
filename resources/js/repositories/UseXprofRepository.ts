@@ -1,3 +1,4 @@
+import { useNotificationModalStore } from "@/stores/UseNotificationModal.Store"
 import { useXhprofStore } from "@/stores/UseXhprofStore"
 
 export function useXhprofRepository() {
@@ -32,6 +33,8 @@ export function useXhprofRepository() {
         if(!response.ok) {
             throw new Error(`probleme with report request: ${response.status}`)
         }
+
+        useNotificationModalStore().displayNotification('Suppression effectué')
     }
 
   return {

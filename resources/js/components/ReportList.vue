@@ -21,7 +21,7 @@
                 <p class="p-1 text-white font-semibold  bg-[#D7707E] rounded">pmu: {{ converter('pmu', report.peak_memory_usage) }}</p>
             </div>
             <div class="flex" v-if="index === getHoverComputed">
-                <font-awesome-icon @click.stop="deleteReport(report.id)" class="p-2 ml-5 rounded bg-red-500 text-white" icon="fa-solid fa-trash-can" />
+                <font-awesome-icon @click.stop="deleteReport(report.id)" class="p-2 ml-5 rounded-full bg-red-500 text-white" icon="fa-solid fa-trash-can" />
             </div>
         </div>
     </div>
