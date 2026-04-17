@@ -1,0 +1,10 @@
+@theme {
+  --color-wt: #ffa200;
+  --color-cpu: #92af77;
+  --color-mu: #a2bffe;
+  --color-pmu: #d7707e;
+  --color-wt-excl: #ffe3b3;
+  --color-cpu-excl: #92af77;
+  --color-mu-excl: #a2bffe;
+  --color-pmu-excl: #d7707e;
+}

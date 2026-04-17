@@ -1,0 +1,107 @@
+export const PRINCIPAL_METRICS = {
+  wt: {
+    fullName: `Wall Time`,
+    icon: 'fa-clock',
+    backgroundColor: `#ffa200`,
+    unit: `sec`,
+    divided: 1000000,
+  },
+  cpu: {
+    fullName: `CPU Time`,
+    icon: 'fa-microchip',
+    backgroundColor: `#92af77`,
+    unit: `sec`,
+    divided: 1000000,
+  },
+  mu: {
+    fullName: `Memory Usage`,
+    icon: 'fa-memory',
+    backgroundColor: `#A2BFFE`,
+    unit: `kbit`,
+    divided: 1000,
+  },
+  pmu: {
+    fullName: `Peak Memory Usage`,
+    icon: 'fa-fire-flame-curved',
+    backgroundColor: `#D7707E`,
+    unit: `kbit`,
+    divided: 1000,
+  },
+}
+
+export const METRICS = {
+  ...PRINCIPAL_METRICS,
+  'wt-excl': {
+    fullName: `Wall Time`,
+    icon: 'fa-clock',
+    backgroundColor: `#ffd080`,
+    unit: `sec`,
+    divided: 1000000,
+  },
+  'wt-excl-percentage': {
+    fullName: `Wall Time percentage`,
+    icon: 'fa-clock.svg',
+    backgroundColor: `#ffa200`,
+    unit: `%`,
+    divided: 1,
+  },
+  'cpu-excl': {
+    fullName: `CPU Time exclude`,
+    icon: 'fa-microchip',
+    backgroundColor: `#92af77`,
+    unit: `sec`,
+    divided: 1000000,
+  },
+  'cpu-excl-percentage': {
+    fullName: `CPU Time percentage`,
+    icon: 'fa-microchip',
+    backgroundColor: `#92af77`,
+    unit: `%`,
+    divided: 1,
+  },
+  'mu-excl': {
+    fullName: `Memory Usage exclude`,
+    icon: 'fa-memory',
+    backgroundColor: `#A2BFFE`,
+    unit: `kbit`,
+    divided: 1000,
+  },
+  'mu-excl-percentage': {
+    fullName: `Memory Usage percentage`,
+    icon: 'fa-memory',
+    backgroundColor: `#A2BFFE`,
+    unit: `%`,
+    divided: 1,
+  },
+  'pmu-excl': {
+    fullName: `Peak Memory Usage exclude`,
+    icon: 'fa-fire-flame-curved',
+    backgroundColor: `#D7707E`,
+    unit: `kbit`,
+    divided: 1000,
+  },
+  'pmu-excl-percentage': {
+    fullName: `Peak Memory Usage percentage`,
+    icon: 'fa-fire-flame-curved',
+    backgroundColor: `#D7707E`,
+    unit: `%`,
+    divided: 1,
+  },
+}
+
+export const METRIC_KEY = [
+  'wt',
+  'wt-excl',
+  'wt-excl-percentage',
+  'cpu',
+  'cpu-excl',
+  'cpu-excl-percentage',
+  'mu',
+  'mu-excl',
+  'mu-excl-percentage',
+  'pmu',
+  'pmu-excl',
+  'pmu-excl-percentage',
+  'ct',
+  'key',
+]

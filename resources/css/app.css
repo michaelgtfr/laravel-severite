@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+/* these are necessary styles for vue flow */
+@import '@vue-flow/core/dist/style.css';
+
+/* this contains the default theme, these are optional styles */
+@import '@vue-flow/core/dist/theme-default.css';
+
+@import './base.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme inline {
+    --font-sans:
+        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
+
+body {
+    @apply bg-gray-100;
+}

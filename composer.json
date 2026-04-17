@@ -1,0 +1,37 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "michaelgtfr/laravel-severite",
+    "type": "library",
+    "description": "Package Severite pour Laravel",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^12.0",
+        "inertiajs/inertia-laravel": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Severite\\": "src/",
+            "SeveriteScript\\": "script//"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Severite\\Providers\\SeveriteServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
