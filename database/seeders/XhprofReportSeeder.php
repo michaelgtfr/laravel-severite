@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Severite\Database\Seeders;
 
-use App\Models\XhprofReport;
+use Severite\Models\XhprofReport;
 use Illuminate\Database\Seeder;
 
 class XhprofReportSeeder extends Seeder
