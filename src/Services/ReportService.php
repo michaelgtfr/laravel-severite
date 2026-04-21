@@ -2,12 +2,12 @@
 
 namespace Severite\Services;
 
+use Illuminate\Database\Eloquent\Collection;
 use Severite\Models\XhprofReport;
 
 class ReportService
 {
-    //todo: récupèrer la list des raport
-    public static function getListOfReport()
+    public static function getListOfReport(): Collection
     {
         return XhprofReport::all([
             'id',
