@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^2.0",
-        "orchestra/testbench": "^10.11",
+        "orchestra/testbench": "^11",
         "pestphp/pest": "^4.6",
         "pestphp/pest-plugin-laravel": "^4.1"
     },
