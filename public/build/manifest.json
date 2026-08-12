@@ -1,0 +1,26 @@
+{
+  "resources/js/app.ts": {
+    "file": "assets/severite/severite-BwAODU8W.js",
+    "name": "severite",
+    "src": "resources/js/app.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/HomeView.vue"
+    ],
+    "css": [
+      "assets/severite/severite-uVXa2D5_.css"
+    ]
+  },
+  "resources/js/pages/HomeView.vue": {
+    "file": "assets/severite/HomeView-p9riR_bH.js",
+    "name": "HomeView",
+    "src": "resources/js/pages/HomeView.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts"
+    ],
+    "css": [
+      "assets/severite/HomeView-O0t2ff7m.css"
+    ]
+  }
+}
