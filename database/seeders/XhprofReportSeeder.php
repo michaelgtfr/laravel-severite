@@ -2,8 +2,8 @@
 
 namespace Severite\Database\Seeders;
 
-use Severite\Models\XhprofReport;
 use Illuminate\Database\Seeder;
+use Severite\Models\XhprofReport;
 
 class XhprofReportSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class XhprofReportSeeder extends Seeder
     {
         XhprofReport::create([
             'title' => 'Laravel – traitement rapport XHProf',
-            'tag'   => 'service seeder',
+            'tag' => 'service seeder',
             'wall_time' => 300000,
             'central_processing_unit' => 280000,
             'memory_usage' => 5000000,

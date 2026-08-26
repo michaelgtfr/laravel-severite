@@ -3,10 +3,9 @@
 namespace Severite\Http\Middleware;
 
 use Closure;
-use Severite\Models\XhprofReport;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use ReflectionExtension;
+use Illuminate\Support\Str;
+use Severite\Models\XhprofReport;
 use Symfony\Component\HttpFoundation\Response;
 
 class SeveriteReportMiddleware
@@ -14,10 +13,10 @@ class SeveriteReportMiddleware
     private Request $request;
 
     /**
-    * Handle an incoming request.
-    *
-    * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-    */
+     * Handle an incoming request.
+     *
+     * @param  Closure(Request): (Response)  $next
+     */
     public function handle(Request $request, Closure $next): Response
     {
         $this->request = $request;
@@ -37,10 +36,6 @@ class SeveriteReportMiddleware
         return $response;
     }
 
-    /**
-     * @return void
-     *
-     */
     private function xhprofDependency(): void
     {
         $XHPROF_ROOT = config('severite.xhprof-lib-url');
@@ -66,7 +61,7 @@ class SeveriteReportMiddleware
 
     private function generateXhprofReport($report)
     {
-        //todo: attention pour le moment on enregistre en bdd
+        // todo: attention pour le moment on enregistre en bdd
         $title = $this->title();
         $mainFunction = $this->manageFistData($report);
 

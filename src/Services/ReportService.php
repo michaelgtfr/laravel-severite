@@ -16,7 +16,7 @@ class ReportService
             'wall_time',
             'memory_usage',
             'peak_memory_usage',
-            'central_processing_unit'
+            'central_processing_unit',
         ]);
     }
 }

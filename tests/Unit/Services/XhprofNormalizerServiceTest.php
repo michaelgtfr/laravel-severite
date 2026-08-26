@@ -8,10 +8,10 @@ use Severite\Services\XhprofNormalizerService;
 function normReport(): array
 {
     return [
-        'main()'         => ['ct' => 1, 'wt' => 100, 'cpu' => 90, 'mu' => 1000, 'pmu' => 900],
+        'main()' => ['ct' => 1, 'wt' => 100, 'cpu' => 90, 'mu' => 1000, 'pmu' => 900],
         'main()==>funcA' => ['ct' => 1, 'wt' => 60,  'cpu' => 55, 'mu' => 600,  'pmu' => 500],
         'main()==>funcB' => ['ct' => 2, 'wt' => 30,  'cpu' => 25, 'mu' => 300,  'pmu' => 200],
-        'funcA==>funcC'  => ['ct' => 1, 'wt' => 40,  'cpu' => 35, 'mu' => 400,  'pmu' => 300],
+        'funcA==>funcC' => ['ct' => 1, 'wt' => 40,  'cpu' => 35, 'mu' => 400,  'pmu' => 300],
     ];
 }
 
@@ -22,7 +22,7 @@ function normPrivate(object $obj, string $prop): mixed
 
 function normServiceAfterStep3(): XhprofNormalizerService
 {
-    $svc = new XhprofNormalizerService();
+    $svc = new XhprofNormalizerService;
     $svc->normalizeFunction(normReport());
     $svc->createGlobalMetricByFunction();
     $svc->setChildrenFunctionInFunction();
@@ -46,7 +46,7 @@ describe('XhprofNormalizerService', function () {
     describe('getCurrentAndParentFunctionOnKey', function () {
 
         it('returns current=main() and parent=null for the root entry', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             [$current, $parent] = $svc->getCurrentAndParentFunctionOnKey('main()');
 
             expect($current)->toBe('main()')
@@ -54,7 +54,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('splits a simple parent==>child edge correctly', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             [$current, $parent] = $svc->getCurrentAndParentFunctionOnKey('main()==>funcA');
 
             expect($current)->toBe('funcA')
@@ -62,7 +62,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('handles fully-qualified class::method names on both sides', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             [$current, $parent] = $svc->getCurrentAndParentFunctionOnKey(
                 'App\\Http\\Kernel::handle==>Illuminate\\Pipeline\\Pipeline::run'
             );
@@ -72,7 +72,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('returns a two-element array in both cases', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
 
             expect($svc->getCurrentAndParentFunctionOnKey('main()'))->toHaveCount(2);
             expect($svc->getCurrentAndParentFunctionOnKey('a==>b'))->toHaveCount(2);
@@ -83,7 +83,7 @@ describe('XhprofNormalizerService', function () {
     describe('setFunctionAndMetricsInReportNormalized', function () {
 
         it('creates the function entry with the parent name as metrics key', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->setFunctionAndMetricsInReportNormalized('funcA', 'main()', ['wt' => 50]);
 
             $normalized = normPrivate($svc, 'reportNormalized');
@@ -94,7 +94,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('uses the function name itself as the metrics key when parent is null (root)', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->setFunctionAndMetricsInReportNormalized('main()', null, ['wt' => 100]);
 
             $normalized = normPrivate($svc, 'reportNormalized');
@@ -103,7 +103,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('appends a second parent entry without overwriting the first', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->setFunctionAndMetricsInReportNormalized('funcShared', 'funcA', ['wt' => 10]);
             $svc->setFunctionAndMetricsInReportNormalized('funcShared', 'funcB', ['wt' => 20]);
 
@@ -120,7 +120,7 @@ describe('XhprofNormalizerService', function () {
     describe('normalizeFunction', function () {
 
         it('creates one entry per unique function name', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
 
             expect(normPrivate($svc, 'reportNormalized'))
@@ -128,7 +128,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('stores child metrics under the parent key', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
 
             expect(normPrivate($svc, 'reportNormalized')['funcA']['metrics'])
@@ -136,7 +136,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('stores root metrics under its own name as key', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
 
             expect(normPrivate($svc, 'reportNormalized')['main()']['metrics'])
@@ -144,7 +144,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('preserves the original metric values', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
             $n = normPrivate($svc, 'reportNormalized');
 
@@ -158,7 +158,7 @@ describe('XhprofNormalizerService', function () {
     describe('createGlobalMetricByFunction', function () {
 
         it('aggregates single-parent metrics into globalMetrics', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
             $svc->createGlobalMetricByFunction();
             $n = normPrivate($svc, 'reportNormalized');
@@ -168,7 +168,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('sums globalMetrics when a function is called from multiple parents', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(array_merge(normReport(), [
                 'funcA==>funcShared' => ['ct' => 1, 'wt' => 10, 'cpu' => 8,  'mu' => 100, 'pmu' => 0],
                 'funcB==>funcShared' => ['ct' => 1, 'wt' => 15, 'cpu' => 12, 'mu' => 150, 'pmu' => 0],
@@ -181,7 +181,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('sets an empty parentFunction for main()', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
             $svc->createGlobalMetricByFunction();
 
@@ -189,7 +189,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('correctly identifies direct parents of child functions', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(normReport());
             $svc->createGlobalMetricByFunction();
             $n = normPrivate($svc, 'reportNormalized');
@@ -199,7 +199,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('lists all parents when a function has multiple callers', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(array_merge(normReport(), [
                 'funcA==>funcShared' => ['ct' => 1, 'wt' => 10, 'cpu' => 8, 'mu' => 100, 'pmu' => 0],
                 'funcB==>funcShared' => ['ct' => 1, 'wt' => 15, 'cpu' => 12, 'mu' => 150, 'pmu' => 0],
@@ -237,7 +237,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('gives main() no childFunction entry when the report has only main()', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(['main()' => ['ct' => 1, 'wt' => 10, 'cpu' => 8, 'mu' => 100, 'pmu' => 0]]);
             $svc->createGlobalMetricByFunction();
             $svc->setChildrenFunctionInFunction();
@@ -293,7 +293,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('exposes all four excl keys for every function', function () {
-            $n    = normGetExcl();
+            $n = normGetExcl();
             $keys = ['wt-excl', 'cpu-excl', 'mu-excl', 'pmu-excl'];
 
             foreach (['main()', 'funcA', 'funcB', 'funcC'] as $fn) {
@@ -302,7 +302,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('exposes all four total-percentage keys for every function', function () {
-            $n    = normGetExcl();
+            $n = normGetExcl();
             $keys = ['wt-total-percentage', 'cpu-total-percentage', 'mu-total-percentage', 'pmu-total-percentage'];
 
             foreach (['main()', 'funcA', 'funcB', 'funcC'] as $fn) {
@@ -311,7 +311,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('exposes all four excl-percentage keys for every function', function () {
-            $n    = normGetExcl();
+            $n = normGetExcl();
             $keys = ['wt-excl-percentage', 'cpu-excl-percentage', 'mu-excl-percentage', 'pmu-excl-percentage'];
 
             foreach (['main()', 'funcA', 'funcB', 'funcC'] as $fn) {
@@ -320,9 +320,9 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('returns 0 for every percentage metric when main() has zero values', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction([
-                'main()'         => ['ct' => 1, 'wt' => 0, 'cpu' => 0, 'mu' => 0, 'pmu' => 0],
+                'main()' => ['ct' => 1, 'wt' => 0, 'cpu' => 0, 'mu' => 0, 'pmu' => 0],
                 'main()==>funcA' => ['ct' => 1, 'wt' => 0, 'cpu' => 0, 'mu' => 0, 'pmu' => 0],
             ]);
             $svc->createGlobalMetricByFunction();
@@ -367,10 +367,10 @@ describe('XhprofNormalizerService', function () {
             $svc = normServiceAfterStep3();
             $svc->setExcludeMetricsAndPercentageMetrics();
             $svc->sortParentChildren();
-            $keys    = array_keys(normPrivate($svc, 'reportNormalizedSorted'));
+            $keys = array_keys(normPrivate($svc, 'reportNormalizedSorted'));
             $posMain = array_search('main()', $keys);
-            $posA    = array_search('funcA', $keys);
-            $posB    = array_search('funcB', $keys);
+            $posA = array_search('funcA', $keys);
+            $posB = array_search('funcB', $keys);
 
             expect($posMain)->toBeLessThan($posA)
                 ->and($posMain)->toBeLessThan($posB);
@@ -388,7 +388,7 @@ describe('XhprofNormalizerService', function () {
         it('handles a diamond-shaped call graph without duplicating the shared node', function () {
             // main → funcA → funcShared
             // main → funcB → funcShared
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
             $svc->normalizeFunction(array_merge(normReport(), [
                 'funcA==>funcShared' => ['ct' => 1, 'wt' => 5, 'cpu' => 4, 'mu' => 50, 'pmu' => 0],
                 'funcB==>funcShared' => ['ct' => 1, 'wt' => 5, 'cpu' => 4, 'mu' => 50, 'pmu' => 0],
@@ -408,19 +408,19 @@ describe('XhprofNormalizerService', function () {
     describe('normalize', function () {
 
         it('returns all function names from the raw report', function () {
-            $result = (new XhprofNormalizerService())->normalize(normReport());
+            $result = (new XhprofNormalizerService)->normalize(normReport());
 
             expect($result)->toHaveKeys(['main()', 'funcA', 'funcB', 'funcC']);
         });
 
         it('places main() at the top of the returned array', function () {
-            $result = (new XhprofNormalizerService())->normalize(normReport());
+            $result = (new XhprofNormalizerService)->normalize(normReport());
 
             expect(array_key_first($result))->toBe('main()');
         });
 
         it('each entry contains globalMetrics, metrics, parentFunction and childFunction', function () {
-            $result = (new XhprofNormalizerService())->normalize(normReport());
+            $result = (new XhprofNormalizerService)->normalize(normReport());
 
             foreach ($result as $data) {
                 expect($data)->toHaveKeys(['globalMetrics', 'metrics', 'parentFunction', 'childFunction']);
@@ -428,19 +428,19 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('resets internal state between two consecutive calls', function () {
-            $svc = new XhprofNormalizerService();
+            $svc = new XhprofNormalizerService;
 
             $svc->normalize(normReport());
 
             $onlyMain = ['main()' => ['ct' => 1, 'wt' => 10, 'cpu' => 8, 'mu' => 100, 'pmu' => 0]];
-            $second   = $svc->normalize($onlyMain);
+            $second = $svc->normalize($onlyMain);
 
             expect($second)->toHaveCount(1)
                 ->and($second)->toHaveKey('main()');
         });
 
         it('works for a minimal report that contains only main()', function () {
-            $result = (new XhprofNormalizerService())->normalize([
+            $result = (new XhprofNormalizerService)->normalize([
                 'main()' => ['ct' => 1, 'wt' => 10, 'cpu' => 8, 'mu' => 100, 'pmu' => 0],
             ]);
 
@@ -450,7 +450,7 @@ describe('XhprofNormalizerService', function () {
         });
 
         it('computes wt-total-percentage=100 for main() through the full pipeline', function () {
-            $result = (new XhprofNormalizerService())->normalize(normReport());
+            $result = (new XhprofNormalizerService)->normalize(normReport());
 
             expect($result['main()']['globalMetrics']['wt-total-percentage'])->toEqual(100.0);
         });

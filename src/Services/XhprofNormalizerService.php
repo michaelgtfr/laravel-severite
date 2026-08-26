@@ -20,7 +20,7 @@ class XhprofNormalizerService
      */
     public function normalize(array $rawReport): array
     {
-        $this->reportNormalized       = [];
+        $this->reportNormalized = [];
         $this->reportNormalizedSorted = [];
 
         $this->normalizeFunction($rawReport);
@@ -86,7 +86,7 @@ class XhprofNormalizerService
     {
         foreach ($this->reportNormalized as $functionName => $functionData) {
             $globalMetrics = [];
-            $parents       = [];
+            $parents = [];
 
             foreach ($functionData['metrics'] as $parentName => $metricValues) {
                 $parents[] = $parentName;
@@ -134,7 +134,7 @@ class XhprofNormalizerService
         foreach ($this->reportNormalized as $functionName => $functionData) {
             foreach ($this->principalMetricsInPercentage as $metric) {
                 $this->reportNormalized[$functionName]['globalMetrics']["$metric-total-percentage"] =
-                    !empty($mainMetrics[$metric])
+                    ! empty($mainMetrics[$metric])
                         ? ($functionData['globalMetrics'][$metric] * 100) / $mainMetrics[$metric]
                         : 0;
             }
@@ -148,7 +148,7 @@ class XhprofNormalizerService
 
             foreach ($this->principalMetricsInPercentage as $metric) {
                 $this->reportNormalized[$functionName]['globalMetrics']["$metric-excl-percentage"] =
-                    !empty($mainMetrics[$metric])
+                    ! empty($mainMetrics[$metric])
                         ? ($this->reportNormalized[$functionName]['globalMetrics']["$metric-excl"] * 100) / $mainMetrics[$metric]
                         : 0;
             }

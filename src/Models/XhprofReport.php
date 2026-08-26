@@ -12,7 +12,9 @@ class XhprofReport extends Model
     use HasUuids;
 
     protected $table = 'xhprof_report';  // 👈 Laravel 12
+
     protected $keyType = 'string'; // 👈 Laravel 12
+
     public $incrementing = false; // 👈 Laravel 12
 
     protected $fillable = [
@@ -23,7 +25,7 @@ class XhprofReport extends Model
         'wall_time',
         'memory_usage',
         'peak_memory_usage',
-        'central_processing_unit'
+        'central_processing_unit',
     ];
 
     /**
