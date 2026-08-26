@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General question
+    url: https://github.com/michaelgtfr/laravel-severite/discussions
+    about: For questions, please use Discussions instead
