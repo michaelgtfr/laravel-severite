@@ -2,11 +2,11 @@
 
 namespace Severite\Providers;
 
-use Severite\Console\Commands\CreateSeveriteMigrationCommand;
 use Illuminate\Contracts\Foundation\CachesRoutes;
-use Severite\Console\Commands\InstallSeveriteCommand;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Severite\Console\Commands\CreateSeveriteMigrationCommand;
+use Severite\Console\Commands\InstallSeveriteCommand;
 use Severite\Http\Middleware\SeveriteInertiaMiddleware;
 use SeveriteScript\ComposerScripts;
 
@@ -51,8 +51,8 @@ class SeveriteServiceProvider extends ServiceProvider
     public function runningInConsole()
     {
         if ($this->app->runningInConsole()) {
-            //todo:  Affiche le message une seule fois après installation
-            //todo voir sino pour couper les messages speicifque pour chaque partie
+            // todo:  Affiche le message une seule fois après installation
+            // todo voir sino pour couper les messages speicifque pour chaque partie
             if (! file_exists(config_path('severite.php'))) {
                 ComposerScripts::postInstall();
             }
@@ -80,10 +80,10 @@ class SeveriteServiceProvider extends ServiceProvider
         }
 
         Route::group([
-            'prefix'     => config('severite.path', 'severite'),
-            'namespace'  => 'Severite\Http\Controllers\ReportController',
+            'prefix' => config('severite.path', 'severite'),
+            'namespace' => 'Severite\Http\Controllers\ReportController',
             'middleware' => [SeveriteInertiaMiddleware::class],
-            'as'         => 'severite.',
+            'as' => 'severite.',
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         });

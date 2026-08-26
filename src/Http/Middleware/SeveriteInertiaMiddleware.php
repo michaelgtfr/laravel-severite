@@ -10,6 +10,7 @@ class SeveriteInertiaMiddleware
     public function handle($request, Closure $next)
     {
         Inertia::setRootView('severite');
+
         return $next($request);
     }
 }

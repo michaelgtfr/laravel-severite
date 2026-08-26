@@ -2,34 +2,29 @@
 
 namespace Severite\Http\Middleware;
 
-use Severite\Models\XhprofReport;
 use Closure;
 use Illuminate\Support\Str;
+use Severite\Models\XhprofReport;
 
 class SeveriteReportJobMiddleware
 {
     /**
-     *
-     * @param  \Closure(object): void  $next
+     * @param  Closure(object): void  $next
      */
     public function handle(object $job, Closure $next): void
     {
-        //todo: encore a gerer le tag, l'enregistrement du rapport
+        // todo: encore a gerer le tag, l'enregistrement du rapport
 
         $this->xhprofDependency();
         $this->xhprofActivate();
 
-        //? a voir si c'est bon
+        // ? a voir si c'est bon
         $next($job);
 
         $xhprofData = $this->xhprofDeactivate();
         $this->generateXhprofReport($xhprofData);
     }
 
-    /**
-     * @return void
-     *
-     */
     private function xhprofDependency(): void
     {
         $XHPROF_ROOT = '/usr/share/php/xhprof_lib/utils';
@@ -50,7 +45,7 @@ class SeveriteReportJobMiddleware
 
     private function generateXhprofReport($report)
     {
-        //todo: attention pour le moment on enregistre en bdd
+        // todo: attention pour le moment on enregistre en bdd
         $title = $this->title();
         $mainFunction = $this->manageFistData($report);
 
@@ -72,7 +67,7 @@ class SeveriteReportJobMiddleware
 
     protected function title(): string
     {
-        //todo: voir pour prendre l'unique id du job, sinon le nom de la queue
+        // todo: voir pour prendre l'unique id du job, sinon le nom de la queue
         return Str::uuid();
     }
 

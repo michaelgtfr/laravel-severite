@@ -24,6 +24,7 @@ class ReportController
      *     path="/severite",
      *     summary="List all XHProf profiling reports",
      *     tags={"Reports"},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="List of profiling reports"
@@ -45,12 +46,15 @@ class ReportController
      *     path="/severite/{reportId}",
      *     summary="Get normalized XHProf data for a report",
      *     tags={"Reports"},
+     *
      *     @OA\Parameter(
      *         name="reportId",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string", format="uuid")
      *     ),
+     *
      *     @OA\Response(response=200, description="Normalized profiling report data"),
      *     @OA\Response(response=404, description="Report not found")
      * )
@@ -67,12 +71,15 @@ class ReportController
      *     path="/severite/{reportId}",
      *     summary="Delete a profiling report",
      *     tags={"Reports"},
+     *
      *     @OA\Parameter(
      *         name="reportId",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string", format="uuid")
      *     ),
+     *
      *     @OA\Response(response=204, description="Report deleted successfully"),
      *     @OA\Response(response=404, description="Report not found")
      * )
@@ -81,7 +88,7 @@ class ReportController
     {
         $deleted = $this->xhprofReportService->deleteReport($reportId);
 
-        if (!$deleted) {
+        if (! $deleted) {
             abort(404, 'Report not found');
         }
 

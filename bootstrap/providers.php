@@ -1,6 +1,9 @@
 <?php
 
+use Severite\Providers\AppServiceProvider;
+use Severite\Providers\SeveriteServiceProvider;
+
 return [
-    Severite\Providers\AppServiceProvider::class,
-    Severite\Providers\SeveriteServiceProvider::class,
+    AppServiceProvider::class,
+    SeveriteServiceProvider::class,
 ];
